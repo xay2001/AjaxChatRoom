@@ -1,0 +1,43 @@
+.regButton {
+    background-color: white;
+    color: #7971EA;
+}
+
+.mt-200 {
+    margin-top: 200px;
+}
+
+.pd {
+    padding-top: 20px;
+}
+
+.btColor {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.mt {
+    margin-top: 2px;
+    padding-top: 2px;
+}
+
+.out-div {
+    color: #FFFFFF;
+    font-size: 16px;
+    line-height: 40px;
+    display: inline-block;
+    height: 40px;
+    width: auto;
+    text-align: center;
+    border-radius: 5px;
+    margin-left: 20px;
+    vertical-align: top;
+    background-color: #3A88F7;
+}
+
+.content {
+    margin-left: 10px;
+    margin-right: 20px;
+    padding-left: 10px;
+}

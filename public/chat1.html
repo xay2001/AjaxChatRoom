@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="refresh" content="10">
+    <title>chat</title>
+
+
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/prettyPhoto.css" rel="stylesheet">
+
+    <link href="css/responsive.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/chat-client.css">
+    <link href="css/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,700">
+    <link rel="stylesheet" href="fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+
+
+    <link rel="stylesheet" href="css/aos.css">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/iconfont.css">
+    <link rel="stylesheet" href="css/index.css">
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+
+    <div class="site-wrap">
+        <header class="site-navbar" role="banner">
+            <div class="site-navbar-top">
+                <div class="container">
+                    <div class="row align-items-center">
+
+                        <div class="col-8 col-md-4 order-2 order-md-1 site-search-icon text-left">
+                        </div>
+
+                        <div class="col-12 mb-3 mb-md-0 col-md-4 order-1 order-md-2 text-center">
+                        </div>
+
+                        <div class="col-6 col-md-4 order-3 order-md-3 text-right">
+                            <div class="site-top-icons">
+                                <ul id="denglu">
+                                    <li><span class="iconfont icon-tuichu"></span></li>
+                                    <li><a href="Index.html"><span style="font-size: 4px" class="mb-lg-2">退出</span></a></li>
+                            </div>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+    </div>
+    </header>
+    </div>
+
+
+    <section id="chat_main" class="pd">
+
+
+        <div class="container chat_main  center-block">
+
+            <div class="container chat_header">
+                <img src="image/liaotianjilu-2.png">&nbsp;&nbsp;私密聊天室
+            </div>
+            <div class="container">
+                <div class="row">
+                    <!-- <div id="chat_container"> -->
+                    <div class="conversation  col-md-8 col-sm-12">
+                        <ul id="messages"></ul>
+                        <form class="chat_form" action="" accept-charset="UTF-8">
+                            <div class="edit row">
+
+
+                                <!-- <input type="file" id="file">
+                           <i title="选择发送图片" class="fa fa-picture-o" id="img"></i>     -->
+
+                                <div class="selectBox">
+                                    <div class="smile" id="smileDiv">
+                                        <p>经典表情</p>
+                                        <ul class="emoji"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- autocomplete禁用自动完成功能  -->
+                            <textarea id="m" autofocus></textarea>
+                            <button class="btn btColor" id="sub">发送</button>
+                            <!-- <button class="rBtn" οnclick="javascript:history.back();"> <a style="color: white;" href="index.html" >关闭</a> </button> -->
+                        </form>
+                    </div>
+                    <div class="contacts col-md-4   hidden-sm hidden-xs">
+                        <h1>小助手</h1>
+                        <div class="list-group" id="person">
+                            <button onclick="ch()" type="button" class="list-group-item"><span class="iconfont icon-yonghu" style="float: left; padding-top: 6px;"></span>返回公共聊天室</button>
+                            <!-- <button type="button" class="list-group-item">Dapibus ac facilisis in</button>
+                            <button type="button" class="list-group-item">Morbi leo risus</button>
+                            <button type="button" class="list-group-item">Porta ac consectetur ac</button>
+                            <button type="button" class="list-group-item">Vestibulum at eros</button> -->
+                        </div>
+                        <ul id="users">
+                        </ul>
+                        <!-- <p id="person"></p> -->
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+        </div>
+        <!-- </div> -->
+        </div>
+    </section>
+    <section id="bottom">
+        <div id="bottom2" class="container wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+
+        </div>
+    </section>
+
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/qi/jquery.js"></script>
+    <script src="js/qi/bootstrap.min.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/jquery.isotope.min.js"></script>
+    <script src="js/qi/main.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/chat-client.js"></script>
+
+    <script>
+        $(window).load(function() {
+            let uname = decodeURI(location.href).split('=')[1];
+            $.ajax({
+                method: 'GET',
+                url: 'http://localhost:5050/chat2',
+                success: function(data) {
+                    let html = ''
+                    for (let i = 0; i < data.length; i++) {
+                        if (data[i].fasong == uname) {
+                            html += `<li><span class="iconfont icon-yonghu1 mt"></span>&nbsp;&nbsp;我</li>
+                            <br>
+                            <div class="out-div"><span style="padding-left: 20px; padding-right:20px">${data[i].yu}</span></div>`
+                        } else {
+                            html += `<li><span class="iconfont icon-yonghu1 mt"></span>&nbsp;&nbsp;${data[i].fasong}</li>
+                            <br>
+                                         <div class="out-div"><span style="padding-left: 20px; padding-right:20px">${data[i].yu}</span></div>`
+                        }
+                    }
+                    $('#messages').html(html)
+                }
+            })
+        })
+        $('#sub').click(function() {
+            let uname = decodeURI(location.href).split('=')[1];
+            let yu = $('#m').val();
+            $.ajax({
+                method: 'GET',
+                url: 'http://localhost:5050/chat3?uname=' + uname + '=yu=' + yu,
+                success: function(data) {
+
+                }
+            })
+            alert('发送成功')
+        })
+
+        function ch() {
+            let uname = decodeURI(location.href).split('=')[1];
+            window.location.href = 'chat.html?uname=' + uname;
+        }
+    </script>
+</body>
+
+</html> } u } pt> alert('发送成功') })p
+
+</scrip</body>
+
+</html>

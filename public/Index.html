@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>首页</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,700">
+    <link rel="stylesheet" href="fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/iconfont.css">
+
+
+    <link rel="stylesheet" href="css/aos.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+
+
+
+</head>
+
+<body>
+    <div class="site-wrap">
+        <header class="site-navbar" role="banner">
+            <div class="site-navbar-top">
+                <div class="container">
+                    <div class="row align-items-center">
+
+                        <div class="col-8 col-md-4 order-2 order-md-1 site-search-icon text-left">
+                        </div>
+
+                        <div class="col-12 mb-3 mb-md-0 col-md-4 order-1 order-md-2 text-center">
+                        </div>
+
+                        <div class="col-6 col-md-4 order-3 order-md-3 text-right">
+                            <div class="site-top-icons">
+                                <ul id="denglu">
+
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div id="jumbotron1" class="mt-200">
+
+            <!-- <div class="jumbotron ">
+            <h1 class="text-center">欢迎您！点击进入聊天室</h1>
+            <p></p>
+            <p class="text-center">
+                <a class="btn btn-primary btn-lg" href="login.html" role="button">开始聊天</a> &nbsp; &nbsp;
+            </p>
+        </div> -->
+
+            <!-- <h1 class="text-center " style="font-size: 60px;">Ajax 在线聊天室</h1>
+            <br>
+            <p class="text-center">
+                <a class="btn btn-primary btn-lg" href="login.html" role="button">登录</a> &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+                <a class="btn btn-primary btn-lg regButton" href="Register.html" role="button">注册</a>
+            </p> -->
+        </div>
+        <script src="js/jquery.js"></script>
+        <script src="js/jquery-ui.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/jquery.magnific-popup.min.js"></script>
+        <script src="js/aos.js"></script>
+
+        <script src="js/main.js"></script>
+
+        <script>
+            $(window).load(function() {
+                $.ajax({
+                    method: 'GET',
+                    url: 'http://localhost:5050/product/getall',
+                    success: function(data) {
+                        let div1 = ''
+                        let html = ''
+                        html = `<div class="col-md-12">
+                    <div class="nonloop-block-3 owl-carousel  owl-loaded owl-drag">`
+
+                        // for(let j = 0;j<5;j++)
+                        // {
+                        //     Math.floor(Math.random()*(data.length)+1);
+                        // }
+
+
+                        for (let i = 0; i < 5; i++) {
+                            let suiji = Math.floor(Math.random() * (25) + 1);
+                            // console.log(suiji)
+                            // console.log(data.length)
+                            html += `<div className="item">
+                            <div class="block-4 text-center">
+                                <figure class="block-4-image">
+                                    <img src="img/${data[suiji].img}" alt="Image placeholder" class="img-fluid">
+                                         </figure>
+                                         <div class="block-4-text p-4">
+                                              <h3><a href="./detail.html?uid=${data[suiji].uid}">${data[suiji].name}</a></h3>
+                                                  <p class="mb-0">${data[suiji].category}</p>
+                                                   <p class="text-primary font-weight-bold">￥${data[suiji].price}</p>
+                                                    </div>
+                                              </div>
+                                     </div>`
+
+                        }
+                        $('#shoe').html(html);
+                    }
+                })
+                let uname = decodeURI(location.href).split('=')[1];
+                if (uname == null) {
+                    let html1 = `<li><span class="iconfont icon-yonghu"></span></li>
+            <li><a href="login.html"><span style="font-size: 4px" class="mb-lg-2">登录</span></a></li>
+
+            <li><span class="iconfont icon-zhucetianjiahaoyou"></span></li>
+            <li><a href="Register.html"><span style="font-size: 4px" class="mb-lg-2">注册</span></a></li>`
+                    $('#denglu').html(html1);
+                    div1 = `<h1 class="text-center " style="font-size: 60px;">Ajax 在线聊天室</h1>
+            <br>
+            <p class="text-center">
+                <a class="btn btn-primary btn-lg" href="login.html" role="button">登录</a> &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+                <a class="btn btn-primary btn-lg regButton" href="Register.html" role="button">注册</a>
+            </p>`
+                    $('#jumbotron1').html(div1);
+                } else {
+                    let html1 = `<li><span class="iconfont icon-yonghu"></span></li>
+                <li><a href="login.html"><span style="font-size: 4px" class="mb-lg-2">${uname}</span></a></li>
+                    <li><a href="chat.html?uname=${uname}"><span style="font-size: 4px" class="mb-lg-2">点击进入聊天室</span></a></li>
+                    <li><a href="Index.html"><span style="font-size: 4px" class="mb-lg-2">退出</span></a></li></div>`
+                    $('#denglu').html(html1);
+                    div1 = `<h1 class="text-center" style="font-size: 60px;">欢迎您！${uname}&nbsp;&nbsp;</h1>
+                    <br>
+            <p class="text-center">
+                <a class="btn btn-primary btn-lg" href="chat.html?uname=${uname}" role="button">开始聊天</a> &nbsp; &nbsp;
+            </p>`
+                    $('#jumbotron1').html(div1);
+                }
+            })
+
+
+            $('#liaotian').click(function() {
+                let pname = decodeURI(location.href).split('=')[1];
+                console.log(pname);
+                $.ajax({
+                    method: 'POST',
+                    url: 'http://localhost:5050/liaotian?pname=' + pname,
+                    success: function(data) {
+                        console.log(data);
+                        if (data.code == 10) {
+                            alert("不对");
+                        } else {
+                            window.location.href = 'chat.html?pname=' + pname;
+                        }
+
+                    }
+                })
+            })
+        </script>
+
+    </div>
+</body>
+
+</html>
